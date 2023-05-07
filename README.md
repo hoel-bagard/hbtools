@@ -1,5 +1,4 @@
 # hbtools
-# pycocotools stubs
 
 [![PyPI](https://img.shields.io/pypi/v/hbtools?color=green&style=flat)](https://pypi.org/project/hbtools)
 [![PyPI - Implementation](https://img.shields.io/pypi/implementation/hbtools?style=flat)](https://pypi.org/project/hbtools)
@@ -30,8 +29,8 @@ logger.debug("Debug message")
 ### Prints
 ```python
 from hbtools import clean_print
-clean_print("Processing sample (1/10)", end = "\n")
 clean_print("Processing sample (1/10)", end = "\r")
+clean_print("Processing sample (10/10)", end = "\n")
 
 from hbtools import yes_no_prompt
 yes_no_prompt("Would you like to continue ?")
