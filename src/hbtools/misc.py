@@ -1,4 +1,5 @@
 """Module providing miscellaneous functions related to printing."""
+import sys
 from shutil import get_terminal_size
 
 
@@ -28,7 +29,10 @@ def clean_print(msg: str, fallback: tuple[int, int] = (156, 38), end: str = "\n"
 
     Args:
         msg: String to print to the console.
-        fallback: Size of the terminal to use if it cannot be determined by shutil (if using windows for example).
+        fallback: If using Windows, size of the terminal to use if it cannot be determined by shutil.
         end: What to add at the end of the print. Usually '\n' (new line), or '\r' (back to the start of the line).
     """
-    print(msg + " " * (get_terminal_size(fallback=fallback).columns - len(msg)), end=end, flush=True)
+    if sys.platform != "win32":
+        print("\033[2K" + msg, end=end, flush=True)
+    else:
+        print(msg + " " * (get_terminal_size(fallback=fallback).columns - len(msg)), end=end, flush=True)
