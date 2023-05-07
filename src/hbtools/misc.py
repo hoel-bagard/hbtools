@@ -14,15 +14,13 @@ def yes_no_prompt(question: str, *, default: bool = True) -> bool:
     """
     choices = " [Y/n]: " if default else " [y/N]: "
 
-    answer = input(question + choices).lower().strip()
+    while answer := input(question + choices).lower().strip():
+        if answer not in ("y", "n"):
+            print("Input invalid, please enter 'y' or 'n'")
+            continue
+        return answer == "y"
 
-    if len(answer) == 0:
-        return default
-
-    if answer not in ["y", "n"]:
-        print("Input invalid, please enter 'y' or 'n'")
-        return yes_no_prompt(question)
-    return answer == "y"
+    return default
 
 
 def clean_print(msg: str, fallback: tuple[int, int] = (156, 38), end: str = "\n") -> None:
