@@ -27,7 +27,7 @@ requires-python = ">=3.11"
 
 [project.optional-dependencies]
 terminal = ["Pillow", "term_image"]
-# dev = ["pre-commit", "pip-tools", "ruff", "pyright", "opencv-stubs", "hbtools[terminal, flake8]"]
+dev = ["pre-commit", "pip-tools", "ruff", "pyright", "opencv-stubs", "term_image"]
 build = ["hatch"]
 test = ["pytest"]
 flake8 = ["flake8", "flake8-bugbear", "flake8-comprehensions", "flake8-docstrings", "flake8-builtins", "flake8-quotes", "pep8-naming", "flake8-import-order", "flake8-noqa", "flake8-broken-line", "flake8-commas", "Flake8-pyproject"]

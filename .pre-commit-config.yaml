@@ -28,7 +28,7 @@ repos:
     rev: v1.1.300
     hooks:
     - id: pyright
-      additional_dependencies: ["opencv-python>=4.7", "numpy>=1.21", "term_image"]
+      additional_dependencies: ["opencv-python>=4.7", "opencv-stubs", "numpy>=1.21", "term_image"]
 
   - repo: https://github.com/PyCQA/flake8
     rev: 5.0.4
