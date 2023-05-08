@@ -111,3 +111,10 @@ max-line-length = 120
 docstring-convention = "google"
 import-order-style = "smarkets"
 inline-quotes = "double"
+
+[tool.pylint.messages_control]
+max-line-length = 120
+disable = [
+    "no-member",
+    "import-outside-toplevel",
+]
