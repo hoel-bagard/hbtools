@@ -5,12 +5,15 @@ import platform
 import sys
 from logging import handlers, StreamHandler
 from pathlib import Path
-from typing import Literal, Self
+from typing import Literal
 
 if int(platform.python_version_tuple()[1]) >= 11:
     from enum import StrEnum
+    from typing import Self
 else:
     from enum import Enum
+
+    from typing_extensions import Self
     StrEnum = (str, Enum)
 
 
