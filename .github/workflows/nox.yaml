@@ -1,0 +1,21 @@
+name: Nox
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches: [master]
+
+
+jobs:
+  update-dependencies:
+    name: Run tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: wntrblm/nox@2022.11.21
+        with:
+          python-versions: "3.10, 3.11"
+      - name: "Run tests with nox and pytest"
+        run: nox --force-color --error-on-missing-interpreters --sessions tests

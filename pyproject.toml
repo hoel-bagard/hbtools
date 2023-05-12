@@ -10,7 +10,6 @@ readme = "README.md"
 classifiers = [
             "License :: OSI Approved :: MIT License",
             "Programming Language :: Python :: 3",
-            "Programming Language :: Python :: 3.9",
             "Programming Language :: Python :: 3.10",
             "Programming Language :: Python :: 3.11",
             "Operating System :: OS Independent",
@@ -18,8 +17,8 @@ classifiers = [
 ]
 license = {text = "MIT"}
 dynamic = ["version"]
-dependencies = ["opencv-python>=4.7", "numpy>=1.21"]
-requires-python = ">=3.11"
+dependencies = ["opencv-python>=4.7", "numpy>=1.21", "typing_extensions; python_version < '3.11'"]
+requires-python = ">=3.10"
 
 [project.urls]
 "Homepage" = "https://github.com/hoel-bagard/hbtools"
@@ -29,7 +28,7 @@ requires-python = ">=3.11"
 terminal = ["Pillow", "term_image"]
 dev = ["pre-commit", "pip-tools", "ruff", "pyright", "opencv-stubs", "term_image"]
 build = ["hatch"]
-test = ["pytest"]
+test = ["pytest", "nox"]
 flake8 = ["flake8", "flake8-bugbear", "flake8-comprehensions", "flake8-docstrings", "flake8-builtins", "flake8-quotes", "pep8-naming", "flake8-import-order", "flake8-noqa", "flake8-broken-line", "flake8-commas", "Flake8-pyproject"]
 
 [tool.hatch.version]
@@ -56,12 +55,23 @@ publish = "hatch build --clean && hatch publish"
 addopts = ["--import-mode=importlib",]
 
 [tool.ruff]
-select = ["A", "B", "D", "C4", "E", "FBT", "I", "Q", "UP", "ANN", "S", "BLE", "COM", "DTZ", "PIE", "PT", "RSE", "SIM","PTH", "NPY", "RUF"]
-# D407: Missing dashed underline after section ("Args", "Returns")
+select = ["ALL"]
+# D1: Do not require docstrings
 # D203: one-blank-line-before-class  (incompatible)
 # D213: multi-line-summary-second-line  (incompatible)
-ignore = ["D203", "D213", "D407"]
+# D407: Missing dashed underline after section ("Args", "Returns")
+# ERA001: Found commented-out code
+# PLR2004: Magic value used in comparison, consider replacing X with a constant variable
+# T201: `print` found
+ignore = ["D1", "D203", "D213", "D407", "ERA001", "PLR2004", "T201", "TRY"]
 line-length = 120
+
+[tool.ruff.per-file-ignores]
+"noxfile.py" = ["ANN001"]
+# FBT001: Boolean positional arg in function definition
+# INP001 File `X` is part of an implicit namespace package. Add an `__init__.py`.
+# S101: Use of `assert` detected
+"tests/*.py" = ["FBT001", "INP001", "S101"]
 
 [tool.ruff.isort]
 order-by-type = false
@@ -106,11 +116,14 @@ reportUnnecessaryTypeIgnoreComment = "warning"
 reportMatchNotExhaustive = "warning"
 
 [tool.flake8]
-exclude = ["env", "venv"]
 max-line-length = 120
 docstring-convention = "google"
 import-order-style = "smarkets"
 inline-quotes = "double"
+exclude = ["env", "venv", ".nox"]
+# D1: Do not require docstrings
+# NQA102 "# noqa: X" has no matching violations
+ignore = ["D1", "NQA102"]
 
 [tool.pylint.messages_control]
 max-line-length = 120

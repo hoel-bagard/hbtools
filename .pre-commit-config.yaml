@@ -28,7 +28,8 @@ repos:
     rev: v1.1.300
     hooks:
     - id: pyright
-      additional_dependencies: ["opencv-python>=4.7", "opencv-stubs", "numpy>=1.21", "term_image"]
+      # FIXME: Using "hbtools" here is not ideal, stop using pre-commit for pyright and set it up as a separate GA.
+      additional_dependencies: ["opencv-python>=4.7", "opencv-stubs", "numpy>=1.21", "term_image", "pytest", "nox", "hbtools"]
 
   - repo: https://github.com/PyCQA/flake8
     rev: 5.0.4
