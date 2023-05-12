@@ -47,7 +47,7 @@ def test_clean_print_windows(monkeypatch: pytest.MonkeyPatch, msg: str, end: str
                           ("Question 2", "N", False),
                           ])
 def test_yes_no(monkeypatch: pytest.MonkeyPatch, question: str, default: str, expected_answer: bool) -> None:
-    def return_default() -> str:
+    def return_default(_: object) -> str:
         return default
 
     monkeypatch.setattr("builtins.input", return_default)
