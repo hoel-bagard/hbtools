@@ -1,7 +1,7 @@
 import nox
 
 
-@nox.session(python=["3.9", "3.10", "3.11"])
+@nox.session(python=["3.10", "3.11"])
 def tests(session) -> None:  # pyright: ignore[reportMissingParameterType]
     """Run the test suite."""
     session.install("--upgrade", "pip")
