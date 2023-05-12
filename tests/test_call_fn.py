@@ -13,7 +13,7 @@ import pytest
 def test_logger(msg: str, expected: str) -> None:
     logger = hbtools.create_logger("Test", log_dir=None, stdout=True, verbose_level="info")
     with redirect_stdout(StringIO()) as stdout:
-        logger.handlers[0].stream = sys.stdout  # pyright: ignore
+        logger.handlers[0].stream = sys.stdout  # pyright: ignore[reportGeneralTypeIssues]
         logger.info(msg)
         logger.debug("Should not appear")
         logger.handlers[0].flush()
@@ -47,11 +47,14 @@ def test_clean_print_windows(monkeypatch: pytest.MonkeyPatch, msg: str, end: str
                           ("Question 2", "N", False),
                           ])
 def test_yes_no(monkeypatch: pytest.MonkeyPatch, question: str, default: str, expected_answer: bool) -> None:
-    monkeypatch.setattr("builtins.input", lambda _: default)
+    def return_default() -> str:
+        return default
+
+    monkeypatch.setattr("builtins.input", return_default)
     answer = hbtools.yes_no_prompt(question)
     assert answer == expected_answer
 
 
 def test_show_img() -> None:
     with suppress(AttributeError):
-        hbtools.show_img(1)  # pyright: ignore
+        hbtools.show_img(1)  # pyright: ignore[reportGeneralTypeIssues]
