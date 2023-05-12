@@ -19,7 +19,7 @@ classifiers = [
 license = {text = "MIT"}
 dynamic = ["version"]
 dependencies = ["opencv-python>=4.7", "numpy>=1.21"]
-requires-python = ">=3.11"
+requires-python = ">=3.9"
 
 [project.urls]
 "Homepage" = "https://github.com/hoel-bagard/hbtools"
@@ -29,7 +29,7 @@ requires-python = ">=3.11"
 terminal = ["Pillow", "term_image"]
 dev = ["pre-commit", "pip-tools", "ruff", "pyright", "opencv-stubs", "term_image"]
 build = ["hatch"]
-test = ["pytest"]
+test = ["pytest", "nox"]
 flake8 = ["flake8", "flake8-bugbear", "flake8-comprehensions", "flake8-docstrings", "flake8-builtins", "flake8-quotes", "pep8-naming", "flake8-import-order", "flake8-noqa", "flake8-broken-line", "flake8-commas", "Flake8-pyproject"]
 
 [tool.hatch.version]
