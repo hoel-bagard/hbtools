@@ -58,7 +58,8 @@ def create_logger(name: str,
         The logger instance.
     """
     if log_dir is None and not stdout:
-        raise ValueError(f"Either `log_dir` must be a Path or stdout must be `True`, got {log_dir=} and {stdout=}.")
+        msg = f"Either `log_dir` must be a Path or stdout must be `True`, got {log_dir=} and {stdout=}."
+        raise ValueError(msg)
 
     logger = logging.getLogger(name)
 
