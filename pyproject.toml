@@ -57,11 +57,19 @@ addopts = ["--import-mode=importlib",]
 
 [tool.ruff]
 select = ["A", "B", "D", "C4", "E", "FBT", "I", "Q", "UP", "ANN", "S", "BLE", "COM", "DTZ", "PIE", "PT", "RSE", "SIM","PTH", "NPY", "RUF"]
-# D407: Missing dashed underline after section ("Args", "Returns")
+# D1: Do not require docstrings
 # D203: one-blank-line-before-class  (incompatible)
 # D213: multi-line-summary-second-line  (incompatible)
-ignore = ["D203", "D213", "D407"]
+# D407: Missing dashed underline after section ("Args", "Returns")
+ignore = ["D1", "D203", "D213", "D407"]
 line-length = 120
+
+[tool.ruff.per-file-ignores]
+"noxfile.py" = ["ANN001"]
+# S101: Use of `assert` detected
+# FBT001: Boolean positional arg in function definition
+"tests/*.py" = ["S101", "FBT001"]
+
 
 [tool.ruff.isort]
 order-by-type = false
@@ -106,11 +114,13 @@ reportUnnecessaryTypeIgnoreComment = "warning"
 reportMatchNotExhaustive = "warning"
 
 [tool.flake8]
-exclude = ["env", "venv"]
 max-line-length = 120
 docstring-convention = "google"
 import-order-style = "smarkets"
 inline-quotes = "double"
+exclude = ["env", "venv", ".nox"]
+# D1: Do not require docstrings
+ignore = ["D1"]
 
 [tool.pylint.messages_control]
 max-line-length = 120
