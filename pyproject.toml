@@ -62,8 +62,9 @@ select = ["ALL"]
 # D213: multi-line-summary-second-line  (incompatible)
 # D407: Missing dashed underline after section ("Args", "Returns")
 # ERA001: Found commented-out code
+# PLR2004: Magic value used in comparison, consider replacing X with a constant variable
 # T201: `print` found
-ignore = ["D1", "D203", "D213", "D407", "ERA001", "T201", "TRY"]
+ignore = ["D1", "D203", "D213", "D407", "ERA001", "PLR2004", "T201", "TRY"]
 line-length = 120
 
 [tool.ruff.per-file-ignores]

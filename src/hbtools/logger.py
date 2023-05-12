@@ -1,14 +1,20 @@
 """Module providing an easy way to setup a minimal logger."""
 import logging
 import os
+import platform
 import sys
-from enum import StrEnum
 from logging import handlers, StreamHandler
 from pathlib import Path
 from typing import Literal, Self
 
+if int(platform.python_version_tuple()[1]) >= 11:
+    from enum import StrEnum
+else:
+    from enum import Enum
+    StrEnum = (str, Enum)
 
-class ConsoleColor(StrEnum):
+
+class ConsoleColor(*StrEnum):
     """Simple shortcut to use colors in the console."""
 
     HEADER = "\033[95m"

@@ -23,7 +23,7 @@ def show_img(img: npt.NDArray[np.uint8], window_name: str = "Image", *, is_bgr: 
             cv2.namedWindow(window_name, cv2.WND_PROP_FULLSCREEN)
             cv2.setWindowProperty(window_name, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
-        if not is_bgr and img.shape[2] == 3:  # noqa: PLR2004
+        if not is_bgr and img.shape[2] == 3:
             img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
         while True:
             cv2.imshow(window_name, img)
