@@ -5,7 +5,7 @@
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/hbtools?style=flat-square)](https://pypistats.org/packages/hbtools)
 [![License](https://img.shields.io/pypi/l/hbtools?style=flat)](https://opensource.org/licenses/MIT)
 ![Linting](https://github.com/hoel-bagard/hbtools/actions/workflows/pre-commit.yaml/badge.svg)
-![Tests](https://github.com/hoel-bagard/coco-types/actions/workflows/nox.yaml/badge.svg)
+![Tests](https://github.com/hoel-bagard/hbtools/actions/workflows/nox.yaml/badge.svg)
 
 Package containing a few python utils functions.
 
