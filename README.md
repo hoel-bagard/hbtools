@@ -14,8 +14,10 @@ Package containing a few python utils functions.
 The package is available on pypi [here](https://pypi.org/project/hbtools/) you can install it with:
 
 ```
-pip install hbtools
+pip install "hbtools[opencv]"
 ```
+
+(or simply `pip install hbtools` if not using the image part of the package / `pip install "hbtools[opencv-headless]"` if using opencv-headless)
 
 ## Usage
 
@@ -46,5 +48,5 @@ show_img(img)
 
 Additionally, if using a server through ssh, you can install this package with extras for displaying images to the terminal:
 ```
-pip install hbtools[terminal]
+pip install "hbtools[opencv, terminal]"
 ```

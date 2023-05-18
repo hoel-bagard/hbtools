@@ -17,7 +17,7 @@ classifiers = [
 ]
 license = {text = "MIT"}
 dynamic = ["version"]
-dependencies = ["opencv-python>=4.7", "numpy>=1.21", "typing_extensions; python_version < '3.11'"]
+dependencies = ["numpy>=1.21", "typing_extensions; python_version < '3.11'"]
 requires-python = ">=3.10"
 
 [project.urls]
@@ -25,6 +25,8 @@ requires-python = ">=3.10"
 "Bug Tracker" = "https://github.com/hoel-bagard/hbtools/issues"
 
 [project.optional-dependencies]
+opencv = ["opencv-python>=4.7"]
+opencv-headless = ["opencv-python-headless>=4.7"]
 terminal = ["Pillow", "term_image"]
 dev = ["pre-commit", "pip-tools", "ruff", "pyright", "opencv-stubs", "term_image"]
 build = ["hatch"]

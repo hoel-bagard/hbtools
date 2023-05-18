@@ -1,7 +1,10 @@
 """Module providing function to display an image using OpenCV (or term_image as a backup)."""
 import os
 
-import cv2
+try:
+    import cv2
+except ModuleNotFoundError:
+    print("Install the package with hbtools[opencv] or hbtools[opencv-headless] to use this functionality")
 import numpy as np
 import numpy.typing as npt
 
