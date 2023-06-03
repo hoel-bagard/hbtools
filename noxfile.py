@@ -6,7 +6,7 @@ def tests(session) -> None:  # pyright: ignore[reportMissingParameterType]
     """Run the test suite."""
     session.install("--upgrade", "pip")
     # session.install("-r", "requirements/requirements-test.txt")  # Does not work on <3.11 because of the hashes.
-    session.install("pytest")
+    session.install("pytest", "opencv-python")
     session.install(".")
     session.run("pytest", "-v", "tests")
 
