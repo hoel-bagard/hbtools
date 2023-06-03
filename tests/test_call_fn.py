@@ -21,8 +21,8 @@ def test_logger(msg: str, expected: str) -> None:
 
 
 @pytest.mark.parametrize(("msg", "end", "expected"),
-                         [("test1", "\n", "\x1b[2Ktest1\n"),
-                          ("test2", "\r", "\x1b[2Ktest2\r"),
+                         [("test1", "\n", "\r\x1b[Ktest1\n"),
+                          ("test2", "\r", "\r\x1b[Ktest2\r"),
                           ])
 def test_clean_print_linux(msg: str, end: str, expected: str) -> None:
     with redirect_stdout(StringIO()) as stdout:
