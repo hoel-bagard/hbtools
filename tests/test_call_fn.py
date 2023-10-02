@@ -7,8 +7,8 @@ import pytest
 
 
 @pytest.mark.parametrize(("msg", "expected"),
-                         [("test1", "INFO - test1\n"),
-                          ("test2", "INFO - test2\n"),
+                         [("test1", "\x1b[92mINFO - test1\n"),
+                          ("test2", "\x1b[92mINFO - test2\n"),
                           ])
 def test_logger(msg: str, expected: str) -> None:
     logger = hbtools.create_logger("Test", log_dir=None, stdout=True, verbose_level="info")
