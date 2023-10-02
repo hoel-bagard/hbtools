@@ -33,7 +33,7 @@ class ConsoleColor(*StrEnum):
 class ColoredFormatter(logging.Formatter):
     """Formatter adding colors to levelname."""
 
-    def color_format(self: Self, record: logging.LogRecord) -> str:
+    def format(self: Self, record: logging.LogRecord) -> str:  # noqa: A003
         """Add colors to the levelname of the record."""
         levelno = record.levelno
         if levelno == logging.ERROR:
@@ -50,11 +50,13 @@ class ColoredFormatter(logging.Formatter):
         return logging.Formatter.format(self, record)
 
 
-def create_logger(name: str,
-                  *,
-                  log_dir: Path | None = None,
-                  stdout: bool = True,
-                  verbose_level: Literal["debug", "info", "error"] = "info") -> logging.Logger:
+def create_logger(
+    name: str,
+    *,
+    log_dir: Path | None = None,
+    stdout: bool = True,
+    verbose_level: Literal["debug", "info", "error"] = "info",
+) -> logging.Logger:
     """Create a logger.
 
     Args:
