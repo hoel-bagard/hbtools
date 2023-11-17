@@ -84,7 +84,7 @@ def create_logger(
 
     if stdout:
         # Add handler to the logging system (default has none) : outputting in stdout
-        terminal_log_handler = StreamHandler(sys.stdout)
+        terminal_log_handler = StreamHandler(sys.stderr)
         if os.name != "nt":
             # Fancy color for non windows console
             colored_log_formatter = ColoredFormatter("%(levelname)s - %(message)s")
