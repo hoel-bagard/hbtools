@@ -1,5 +1,5 @@
 """Package containing a few python utils functions."""
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 
 from .logger import create_logger
 from .misc import clean_print, yes_no_prompt
