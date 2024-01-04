@@ -75,7 +75,7 @@ def create_logger(
     # If a logger is created multiple times, reinitialize it each time.
     if name in logging.root.manager.loggerDict:
         logger = logging.getLogger(name)
-        for handler in logger.handlers:
+        for handler in logger.handlers.copy():
             logger.removeHandler(handler)
 
     logger = logging.getLogger(name)
