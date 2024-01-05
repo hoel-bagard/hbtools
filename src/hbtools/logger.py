@@ -1,4 +1,5 @@
 """Module providing an easy way to setup a minimal logger."""
+import copy
 import logging
 import os
 import platform
@@ -46,6 +47,8 @@ class ColoredFormatter(logging.Formatter):
             levelname_color = ConsoleColor.BLUE + record.levelname + ConsoleColor.ENDCOLOR
         else:
             levelname_color = record.levelname
+        # Do not modify the record directly, since other handlers might be using it.
+        record = copy.deepcopy(record)
         record.levelname = levelname_color
         return logging.Formatter.format(self, record)
 
