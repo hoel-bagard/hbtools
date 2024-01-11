@@ -71,10 +71,6 @@ def create_logger(
     Returns:
         The logger instance.
     """
-    if log_dir is None and not stdout:
-        msg = f"Either `log_dir` must be a Path or stdout must be `True`, got {log_dir=} and {stdout=}."
-        raise ValueError(msg)
-
     # If a logger is created multiple times, reinitialize it each time.
     if name in logging.root.manager.loggerDict:
         logger = logging.getLogger(name)
