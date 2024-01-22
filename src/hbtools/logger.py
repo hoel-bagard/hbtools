@@ -26,6 +26,7 @@ class ConsoleColor(*StrEnum):
     GREEN = "\033[92m"
     ORANGE = "\033[93m"
     RED = "\033[91m"
+    BOLD_RED = "\033[1;31m"
     ENDCOLOR = "\033[0m"
     BOLD = "\033[1m"
     UNDERLINE = "\033[4m"
@@ -37,7 +38,9 @@ class ColoredFormatter(logging.Formatter):
     def format(self: Self, record: logging.LogRecord) -> str:  # noqa: A003
         """Add colors to the levelname of the record."""
         levelno = record.levelno
-        if levelno == logging.ERROR:
+        if levelno == logging.CRITICAL:
+            levelname_color = ConsoleColor.BOLD_RED + record.levelname + ConsoleColor.ENDCOLOR
+        elif levelno == logging.ERROR:
             levelname_color = ConsoleColor.RED + record.levelname + ConsoleColor.ENDCOLOR
         elif levelno == logging.WARNING:
             levelname_color = ConsoleColor.ORANGE + record.levelname + ConsoleColor.ENDCOLOR
