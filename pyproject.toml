@@ -57,32 +57,46 @@ publish = "hatch build --clean && hatch publish"
 addopts = ["--import-mode=importlib",]
 
 [tool.ruff]
-select = ["ALL"]
-# D1: Do not require docstrings
-# D203: one-blank-line-before-class  (incompatible)
-# D213: multi-line-summary-second-line  (incompatible)
-# D407: Missing dashed underline after section ("Args", "Returns")
-# ERA001: Found commented-out code
-# PLR2004: Magic value used in comparison, consider replacing X with a constant variable
-# T201: `print` found
-ignore = ["D1", "D203", "D213", "D407", "ERA001", "PLR2004", "T201", "TRY"]
 line-length = 120
 
-[tool.ruff.per-file-ignores]
-"noxfile.py" = ["ANN001"]
-# FBT001: Boolean positional arg in function definition
-# INP001 File `X` is part of an implicit namespace package. Add an `__init__.py`.
-# S101: Use of `assert` detected
-"tests/*.py" = ["FBT001", "INP001", "S101"]
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+  "ANN101",    # Missing type annotation for `self` in method
+  "COM812",    # Conflicts with formatter
+  "D1",        # Do not require docstrings
+  "D203",      # one-blank-line-before-class  (incompatible)
+  "D213",      # multi-line-summary-second-line  (incompatible)
+  "D407",      # Missing dashed underline after section ("Args", "Returns")
+  "ERA001",    # Found commented-out code
+  "ISC001",    # Conflicts with formatter
+  "PLR2004",   # Magic value used in comparison, consider replacing X with a constant variable
+  "T201",      # `print` found
+  "TRY",
+]
 
-[tool.ruff.isort]
+[tool.ruff.lint.per-file-ignores]
+"noxfile.py" = ["ANN001"]
+"tests/*.py" = [
+  "FBT001",  # Boolean positional arg in function definition
+  "INP001",  # File `X` is part of an implicit namespace package. Add an `__init__.py`.
+  "S101",    # Use of `assert` detected
+]
+
+[tool.ruff.lint.isort]
 order-by-type = false
 
-[tool.ruff.flake8-quotes]
+[tool.ruff.lint.flake8-quotes]
 docstring-quotes = "double"
 
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
 [tool.pyright]
-include = ["src/hbtools"]
+include = ["src/hbtools", "tests"]
+exclude = [".venv", "venv", ".nox"]
+venvPath = "."
+venv = ".venv"
 pythonVersion = "3.11"
 pythonPlatform = "Linux"
 
@@ -123,9 +137,7 @@ docstring-convention = "google"
 import-order-style = "smarkets"
 inline-quotes = "double"
 exclude = ["env", "venv", ".nox"]
-# D1: Do not require docstrings
-# NQA102 "# noqa: X" has no matching violations
-ignore = ["D1", "NQA102"]
+ignore = ["A003", "C816", "D1", "E704", "NQA102", ]
 
 [tool.pylint.messages_control]
 max-line-length = 120
