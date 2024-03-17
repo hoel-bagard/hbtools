@@ -1,4 +1,5 @@
 """Module providing an easy way to setup a minimal logger."""
+
 import copy
 import logging
 import os
@@ -43,7 +44,7 @@ class ConsoleColor(*StrEnum):
 class ColoredFormatter(logging.Formatter):
     """Formatter adding colors to levelname."""
 
-    def format(self: Self, record: logging.LogRecord) -> str:  # noqa: A003
+    def format(self: Self, record: logging.LogRecord) -> str:
         """Add colors to the levelname of the record."""
         levelno = record.levelno
         if levelno == logging.CRITICAL:

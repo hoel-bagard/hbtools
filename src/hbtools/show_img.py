@@ -1,4 +1,5 @@
 """Module providing function to display an image using OpenCV (or term_image as a backup)."""
+
 import os
 import sys
 
@@ -16,12 +17,15 @@ def show_img(img: npt.NDArray[np.uint8], window_name: str = "Image", *, is_bgr: 
         img: The image that is to be displayed.
         window_name: The name of the window in which the image will be displayed.
         is_bgr: Should be True if the image format is BGR, False otherwise.
+
     """
     try:
         import cv2
     except ModuleNotFoundError:
-        print("Install the package with hbtools[opencv] or hbtools[opencv-headless] to use this functionality",
-              file=sys.stderr)
+        print(
+            "Install the package with hbtools[opencv] or hbtools[opencv-headless] to use this functionality",
+            file=sys.stderr,
+        )
         sys.exit(-1)
 
     if "DISPLAY" in os.environ:
@@ -49,6 +53,6 @@ def show_img(img: npt.NDArray[np.uint8], window_name: str = "Image", *, is_bgr: 
             AutoImage(Image.fromarray(img)).draw()
         except ModuleNotFoundError:
             if "warning_printed" not in show_img.__dict__:
-                show_img.warning_printed = True
+                show_img.warning_printed = True  # pyright: ignore[reportFunctionMemberAccess]
                 print("Consider installing the term_image and Pillow packages to display images in the terminal.")
                 print("You can do that using:\n\tpip install term_image Pillow")

@@ -10,6 +10,7 @@ def tests(session) -> None:  # pyright: ignore[reportMissingParameterType]
     session.install(".")
     session.run("pytest", "-v", "tests")
 
+
 #     # Here we queue up the test coverage session to run next
 #     session.notify("coverage")
 

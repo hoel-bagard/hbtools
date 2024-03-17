@@ -6,34 +6,43 @@ import hbtools
 import pytest
 
 
-@pytest.mark.parametrize(("msg", "expected"),
-                         [("test1", "\x1b[92mINFO\x1b[0m - test1\n"),
-                          ("test2", "\x1b[92mINFO\x1b[0m - test2\n"),
-                          ])
+@pytest.mark.parametrize(
+    ("msg", "expected"),
+    [
+        ("test1", "\x1b[92mINFO\x1b[0m - test1\n"),
+        ("test2", "\x1b[92mINFO\x1b[0m - test2\n"),
+    ],
+)
 def test_logger(msg: str, expected: str) -> None:
     logger = hbtools.create_logger("Test", log_dir=None, stdout=True, verbose_level="info")
     with redirect_stdout(StringIO()) as stdout:
-        logger.handlers[0].stream = sys.stdout  # pyright: ignore[reportGeneralTypeIssues]
+        logger.handlers[0].stream = sys.stdout  # pyright: ignore[reportAttributeAccessIssue]
         logger.info(msg)
         logger.debug("Should not appear")
         logger.handlers[0].flush()
     assert stdout.getvalue() == expected
 
 
-@pytest.mark.parametrize(("msg", "end", "expected"),
-                         [("test1", "\n", "\r\x1b[Ktest1\n"),
-                          ("test2", "\r", "\r\x1b[Ktest2\r"),
-                          ])
+@pytest.mark.parametrize(
+    ("msg", "end", "expected"),
+    [
+        ("test1", "\n", "\r\x1b[Ktest1\n"),
+        ("test2", "\r", "\r\x1b[Ktest2\r"),
+    ],
+)
 def test_clean_print_linux(msg: str, end: str, expected: str) -> None:
     with redirect_stdout(StringIO()) as stdout:
         hbtools.clean_print(msg, end=end)
     assert stdout.getvalue() == expected
 
 
-@pytest.mark.parametrize(("msg", "end", "expected"),
-                         [("test1", "\n", "test1\n"),
-                          ("test2", "\r", "test2\r"),
-                          ])
+@pytest.mark.parametrize(
+    ("msg", "end", "expected"),
+    [
+        ("test1", "\n", "test1\n"),
+        ("test2", "\r", "test2\r"),
+    ],
+)
 def test_clean_print_windows(monkeypatch: pytest.MonkeyPatch, msg: str, end: str, expected: str) -> None:
     monkeypatch.setattr("sys.platform", "win32")
     with redirect_stdout(StringIO()) as stdout:
@@ -42,10 +51,13 @@ def test_clean_print_windows(monkeypatch: pytest.MonkeyPatch, msg: str, end: str
     assert output == expected
 
 
-@pytest.mark.parametrize(("question", "default", "expected_answer"),
-                         [("Question 1", "Y", True),
-                          ("Question 2", "N", False),
-                          ])
+@pytest.mark.parametrize(
+    ("question", "default", "expected_answer"),
+    [
+        ("Question 1", "Y", True),
+        ("Question 2", "N", False),
+    ],
+)
 def test_yes_no(monkeypatch: pytest.MonkeyPatch, question: str, default: str, expected_answer: bool) -> None:
     def return_default(_: object) -> str:
         return default
@@ -57,4 +69,4 @@ def test_yes_no(monkeypatch: pytest.MonkeyPatch, question: str, default: str, ex
 
 def test_show_img() -> None:
     with suppress(AttributeError):
-        hbtools.show_img(1)  # pyright: ignore[reportGeneralTypeIssues]
+        hbtools.show_img(1)  # pyright: ignore[reportArgumentType]

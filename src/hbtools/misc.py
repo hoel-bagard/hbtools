@@ -1,6 +1,20 @@
 """Module providing miscellaneous functions related to printing."""
+
 import sys
 from shutil import get_terminal_size
+from typing import Protocol, TypedDict, TypeVar, Unpack
+
+_T_contra = TypeVar("_T_contra", contravariant=True)
+
+
+class _File(Protocol[_T_contra]):
+    def write(self, s: _T_contra, /) -> object: ...
+    def flush(self) -> object: ...
+
+
+class _PrintKwargs(TypedDict, total=False):
+    sep: str | None
+    file: _File[str] | None
 
 
 def yes_no_prompt(question: str, *, default: bool = True) -> bool:
@@ -12,6 +26,7 @@ def yes_no_prompt(question: str, *, default: bool = True) -> bool:
 
     Returns:
         True for yes, False for no
+
     """
     choices = " [Y/n]: " if default else " [y/N]: "
 
@@ -24,7 +39,9 @@ def yes_no_prompt(question: str, *, default: bool = True) -> bool:
     return default
 
 
-def clean_print(msg: str, fallback: tuple[int, int] = (156, 38), end: str = "\n", **kwargs: object) -> None:
+def clean_print(
+    msg: str, fallback: tuple[int, int] = (156, 38), end: str = "\n", **kwargs: Unpack[_PrintKwargs]
+) -> None:
     r"""Print the given string to the console and erase any character previously written on the line.
 
     Args:
@@ -32,6 +49,7 @@ def clean_print(msg: str, fallback: tuple[int, int] = (156, 38), end: str = "\n"
         fallback: If using Windows, size of the terminal to use if it cannot be determined by shutil.
         end: What to add at the end of the print. Usually '\n' (new line), or '\r' (back to the start of the line).
         kwargs: Print function kwargs.
+
     """
     if sys.platform != "win32":
         print("\r\033[K" + msg, end=end, flush=True, **kwargs)

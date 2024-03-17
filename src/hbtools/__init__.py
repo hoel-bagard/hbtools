@@ -1,4 +1,5 @@
 """Package containing a few python utils functions."""
+
 __version__ = "0.4.0"
 
 from .logger import create_logger
