@@ -17,7 +17,6 @@ def show_img(img: npt.NDArray[np.uint8], window_name: str = "Image", *, is_bgr: 
         img: The image that is to be displayed.
         window_name: The name of the window in which the image will be displayed.
         is_bgr: Should be True if the image format is BGR, False otherwise.
-
     """
     try:
         import cv2

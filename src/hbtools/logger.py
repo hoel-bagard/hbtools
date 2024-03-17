@@ -82,7 +82,6 @@ def create_logger(
 
     Returns:
         The logger instance.
-
     """
     # If a logger is created multiple times, reinitialize it each time.
     if name in logging.root.manager.loggerDict:

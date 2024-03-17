@@ -89,6 +89,9 @@ order-by-type = false
 [tool.ruff.lint.flake8-quotes]
 docstring-quotes = "double"
 
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
 [tool.pyright]
 include = ["src/hbtools", "tests"]
 exclude = [".venv", "venv", ".nox"]

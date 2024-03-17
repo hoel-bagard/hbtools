@@ -33,7 +33,6 @@ def yes_no_prompt(question: str, *, default: bool = True) -> bool:
 
     Returns:
         True for yes, False for no
-
     """
     choices = " [Y/n]: " if default else " [y/N]: "
 
@@ -56,7 +55,6 @@ def clean_print(
         fallback: If using Windows, size of the terminal to use if it cannot be determined by shutil.
         end: What to add at the end of the print. Usually '\n' (new line), or '\r' (back to the start of the line).
         kwargs: Print function kwargs.
-
     """
     if sys.platform != "win32":
         print("\r\033[K" + msg, end=end, flush=True, **kwargs)
