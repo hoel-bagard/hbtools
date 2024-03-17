@@ -4,6 +4,7 @@ import logging
 import os
 import platform
 import sys
+from enum import Enum
 from logging import handlers, StreamHandler
 from pathlib import Path
 from typing import Literal
@@ -12,10 +13,17 @@ if int(platform.python_version_tuple()[1]) >= 11:
     from enum import StrEnum
     from typing import Self
 else:
-    from enum import Enum
-
     from typing_extensions import Self
+
     StrEnum = (str, Enum)
+
+
+class LoggingLevel(Enum):
+    CRITICAL = logging.CRITICAL
+    ERROR = logging.ERROR
+    WARNING = logging.WARNING
+    INFO = logging.INFO
+    DEBUG = logging.DEBUG
 
 
 class ConsoleColor(*StrEnum):
@@ -61,7 +69,7 @@ def create_logger(
     *,
     log_dir: Path | None = None,
     stdout: bool = True,
-    verbose_level: Literal["debug", "info", "error"] = "info",
+    verbose_level: Literal["debug", "info", "warning", "error", "critical", 10, 20, 30, 40, 50] | LoggingLevel = "info",
 ) -> logging.Logger:
     """Create a logger.
 
@@ -73,6 +81,7 @@ def create_logger(
 
     Returns:
         The logger instance.
+
     """
     # If a logger is created multiple times, reinitialize it each time.
     if name in logging.root.manager.loggerDict:
@@ -103,11 +112,15 @@ def create_logger(
         logger.addHandler(terminal_log_handler)
 
     match verbose_level:
-        case "debug":
+        case "debug" | LoggingLevel.DEBUG | 10:
             logger.setLevel(logging.DEBUG)
-        case "info":
+        case "info" | LoggingLevel.INFO | 20:
             logger.setLevel(logging.INFO)
-        case "error":
+        case "warning" | LoggingLevel.WARNING | 30:
+            logger.setLevel(logging.WARNING)
+        case "error" | LoggingLevel.ERROR | 40:
             logger.setLevel(logging.ERROR)
+        case "critical" | LoggingLevel.CRITICAL | 50:
+            logger.setLevel(logging.CRITICAL)
 
     return logger
