@@ -1,8 +1,15 @@
 """Module providing miscellaneous functions related to printing."""
 
+import platform
 import sys
 from shutil import get_terminal_size
-from typing import Protocol, TypedDict, TypeVar, Unpack
+from typing import Protocol, TypedDict, TypeVar
+
+if int(platform.python_version_tuple()[1]) >= 11:
+    from typing import Unpack
+else:
+    from typing_extensions import Unpack
+
 
 _T_contra = TypeVar("_T_contra", contravariant=True)
 
