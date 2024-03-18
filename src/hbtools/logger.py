@@ -60,7 +60,7 @@ class ColoredFormatter(logging.Formatter):
         else:
             levelname_color = record.levelname
         # Do not modify the record directly, since other handlers might be using it.
-        record = copy.deepcopy(record)
+        record = copy.copy(record)
         record.levelname = levelname_color
         return logging.Formatter.format(self, record)
 
