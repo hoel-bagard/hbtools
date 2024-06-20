@@ -6,7 +6,9 @@ from shutil import get_terminal_size
 from typing import Protocol, TypedDict, TypeVar
 
 if int(platform.python_version_tuple()[1]) >= 11:
-    from typing import Unpack
+    # Using typing's Unpack causes pyright warnings.
+    # from typing import Unpack
+    from typing_extensions import Unpack
 else:
     from typing_extensions import Unpack
 
